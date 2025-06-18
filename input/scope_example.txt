@@ -1,0 +1,9 @@
+Fall: 2025-TK-07
+Dateitypen: pdf, docx, xlsx
+Stichwörter: geheim, Verschlüsselung, Passwort
+Zeitraum: 2023-01-01 bis 2023-12-31
+Max. Dateigröße: 50 MB
+Pfad: /home/
+Report: HTML, Hashes: ja, Dateien speichern: ja
+KI-Prompt: Suche nach Finanzbegriffen und Passwortweitergabe in Word- und PDF-Dateien.
+

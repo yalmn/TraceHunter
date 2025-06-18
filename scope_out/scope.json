@@ -1,0 +1,19 @@
+{
+  "case_id": "2025-TK-07",
+  "filters": {
+    "filetypes": [".pdf", ".docx", ".xlsx"],
+    "keywords": ["geheim", "Verschlüsselung", "Passwort"],
+    "date_range": {
+      "created_after": "2023-01-01",
+      "created_before": "2023-12-31"
+    },
+    "max_file_size_mb": 50,
+    "target_paths": ["/home/"]
+  },
+  "output": {
+    "report_format": "HTML",
+    "include_hashes": true,
+    "store_matched_files": true
+  },
+  "ai_prompt": "Suche nach Finanzbegriffen und Passwortweitergabe in Word- und PDF-Dateien."
+}
