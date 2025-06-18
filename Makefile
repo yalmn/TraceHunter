@@ -1,6 +1,6 @@
 # Compiler & Flags
 CC = gcc
-CFLAGS = -Wall -std=c99 \
+CFLAGS = -Wall -std=c11 \
   -I./src -I./src/core -I./src/scope -I./src/report -I./src/external
 
 # Optional CFLAGS/LIBS from pkg-config (preferred on Linux/macOS)

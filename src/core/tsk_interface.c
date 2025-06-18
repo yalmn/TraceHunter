@@ -110,6 +110,7 @@ void compute_sha256(const char *filepath, char *output_hash, size_t hash_size) {
 }
 
 void analyze_partition(const char *image_path, const Scope *scope) {
+    (void)scope;
     printf("[i] Analyse von: %s (Dummy-Funktion: implementiere TSK-Laufwerke)\n", image_path);
     // Hier folgt später die Logik mit TSK: Öffne Image, iteriere durch Filesystem, prüfe Regeln.
 }
