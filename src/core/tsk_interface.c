@@ -97,3 +97,16 @@ void analyze_partition(const char *image_path, const Scope *scope) {
     printf("[i] Analyse von: %s (Dummy-Funktion: implementiere TSK-Laufwerke)\n", image_path);
     // Hier folgt später die Logik mit TSK: Öffne Image, iteriere durch Filesystem, prüfe Regeln.
 }
+
+// Platzhalterfunktionen, damit das Projekt kompilierbar bleibt
+int find_ntfs_offset(const char *image_path) {
+    (void)image_path;
+    printf("[w] find_ntfs_offset: Dummy-Implementierung gibt 0 zurück.\n");
+    return 0;
+}
+
+void list_all_files(const char *image_path, int offset, const Scope *scope) {
+    (void)scope;
+    printf("[w] list_all_files: Dummy-Implementierung (%s @ %d).\n", image_path, offset);
+    // Hier könnte TSK verwendet werden, um Dateien aufzulisten
+}

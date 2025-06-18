@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <jansson.h>
+#include "analyzer.h"
 
 int generate_scope_json(const char *input_txt, const char *output_json) {
     FILE *in = fopen(input_txt, "r");
@@ -87,4 +88,8 @@ int generate_scope_json(const char *input_txt, const char *output_json) {
     fclose(out);
     json_decref(root);
     return 1;
+}
+
+int load_scope(const char *json_path, Scope *scope) {
+    return load_scope_from_json(json_path, scope);
 }
