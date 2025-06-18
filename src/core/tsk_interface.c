@@ -1,6 +1,7 @@
+#define _XOPEN_SOURCE 700
 #include "tsk_interface.h"
 #include <tsk/libtsk.h>
-#include <openssl/sha.h>
+#include <openssl/evp.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -74,23 +75,38 @@ void compute_sha256(const char *filepath, char *output_hash, size_t hash_size) {
         return;
     }
 
-    SHA256_CTX ctx;
-    SHA256_Init(&ctx);
+    EVP_MD_CTX *ctx = EVP_MD_CTX_new();
+    if (!ctx) {
+        fclose(file);
+        strncpy(output_hash, "CTX_ERROR", hash_size);
+        return;
+    }
+
+    if (EVP_DigestInit_ex(ctx, EVP_sha256(), NULL) != 1) {
+        EVP_MD_CTX_free(ctx);
+        fclose(file);
+        strncpy(output_hash, "INIT_ERROR", hash_size);
+        return;
+    }
 
     unsigned char buffer[4096];
     size_t bytes;
     while ((bytes = fread(buffer, 1, sizeof(buffer), file)) != 0) {
-        SHA256_Update(&ctx, buffer, bytes);
+        EVP_DigestUpdate(ctx, buffer, bytes);
     }
 
     fclose(file);
 
-    unsigned char hash[SHA256_DIGEST_LENGTH];
-    SHA256_Final(hash, &ctx);
+    unsigned char hash[EVP_MAX_MD_SIZE];
+    unsigned int len = 0;
+    EVP_DigestFinal_ex(ctx, hash, &len);
+    EVP_MD_CTX_free(ctx);
 
-    for (int i = 0; i < SHA256_DIGEST_LENGTH && i*2+1 < hash_size; i++) {
+    for (unsigned int i = 0; i < len && i*2+1 < hash_size; i++) {
         sprintf(output_hash + i*2, "%02x", hash[i]);
     }
+    if (len * 2 < hash_size)
+        output_hash[len * 2] = '\0';
 }
 
 void analyze_partition(const char *image_path, const Scope *scope) {
