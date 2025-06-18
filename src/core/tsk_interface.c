@@ -10,6 +10,11 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+static th_ai_callback g_ai_cb = NULL;
+
+void tsk_set_ai_callback(th_ai_callback cb) {
+    g_ai_cb = cb;
+}
 
 bool is_filetype_allowed(const char *filename, const Scope *scope) {
     for (int i = 0; i < scope->filetype_count; i++) {
@@ -123,7 +128,11 @@ int find_ntfs_offset(const char *image_path) {
 }
 
 void list_all_files(const char *image_path, int offset, const Scope *scope) {
-    (void)scope;
     printf("[w] list_all_files: Dummy-Implementierung (%s @ %d).\n", image_path, offset);
     // Hier könnte TSK verwendet werden, um Dateien aufzulisten
+
+    // Beispielhafte Verwendung des AI-Callbacks mit einer Dummy-Datei
+    if (g_ai_cb && scope) {
+        g_ai_cb("/dummy/file.txt", scope->ai_prompt);
+    }
 }

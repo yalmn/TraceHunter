@@ -5,6 +5,10 @@
 #include <stddef.h>     // Für size_t
 #include <stdbool.h>
 
+typedef int (*th_ai_callback)(const char *file_path, const char *prompt);
+
+void tsk_set_ai_callback(th_ai_callback cb);
+
 bool is_filetype_allowed(const char *filename, const Scope *scope);
 bool is_path_allowed(const char *path, const Scope *scope);
 bool contains_keywords(const char *filepath, const Scope *scope);
