@@ -1,0 +1,7 @@
+# Ignore build artifacts and OS files
+build/
+bin/
+.DS_Store
+src/.DS_Store
+src/core/.DS_Store
+*.o
